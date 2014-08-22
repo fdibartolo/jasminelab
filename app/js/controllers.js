@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('demoApp.controllers', []).controller('TasksController', ['$scope', function($scope) {
+angular.module('demoApp.controllers', []).controller('TasksController', 
+['$scope', '$filter', function($scope, $filter) {
   $scope.tasks = []
 
   $scope.init = function() {
@@ -15,5 +16,9 @@ angular.module('demoApp.controllers', []).controller('TasksController', ['$scope
       status: 'active'
     }
     $scope.tasks.push(task);
+  }
+
+  $scope.activeTasks = function() {
+    return $filter('filter')($scope.tasks, {status: 'active'})
   }
 }]);

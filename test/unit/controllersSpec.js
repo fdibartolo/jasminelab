@@ -4,9 +4,9 @@ describe('TasksController', function(){
   beforeEach(module('demoApp.controllers'));
 
   var scope, controller;
-  beforeEach(inject(function($rootScope, $controller) {
+  beforeEach(inject(function($rootScope, $filter, $controller) {
     scope = $rootScope.$new();
-    controller = $controller('TasksController', { $scope: scope });
+    controller = $controller('TasksController', { $scope: scope, $filter: $filter });
   }));
 
   it('should have a list of tasks', function() {
@@ -25,5 +25,13 @@ describe('TasksController', function(){
     expect(scope.tasks.length).toBe(0);
     scope.init();
     expect(scope.tasks.length).toBe(3);
+  });
+
+  it("should return active tasks", function() {
+    scope.createTask('a task');
+    scope.tasks.push({description: 'nailed!', status: 'done'});
+
+    expect(scope.tasks.length).toBe(2);
+    expect(scope.activeTasks().length).toBe(1);
   });
 });
