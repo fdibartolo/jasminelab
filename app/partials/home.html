@@ -3,7 +3,7 @@
 
   <div class="row" ng-repeat="task in activeTasks()" style="padding:5px">
     <div class="col-sm-1">
-      <button class="btn btn-primary btn-xs pull-right">Done</button>
+      <button class="btn btn-primary btn-xs pull-right" ng-click="markAsDone(task)">Done</button>
     </div>
     <div class="col-sm-5">{{task.description}}</div>
   </div>

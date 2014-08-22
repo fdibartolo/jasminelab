@@ -34,4 +34,13 @@ describe('TasksController', function(){
     expect(scope.tasks.length).toBe(2);
     expect(scope.activeTasks().length).toBe(1);
   });
+
+  it("should mark tasks as done", function() {
+    scope.init();
+    var firstTask = scope.tasks[0];
+    scope.markAsDone(firstTask);
+
+    expect(scope.tasks.length).toBe(3);
+    expect(scope.activeTasks().length).toBe(2);
+  });
 });
