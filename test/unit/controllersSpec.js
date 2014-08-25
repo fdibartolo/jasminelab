@@ -53,4 +53,18 @@ describe('TasksController', function(){
     expect(scope.doneTasks().length).toBe(1);
   });
 
+  it("should bind new task model", function() {
+    scope.newTask.description = 'a new task';
+    scope.addTask();
+
+    expect(scope.tasks.length).toBe(1);
+    expect(scope.tasks[0].description).toBe('a new task');
+    expect(scope.tasks[0].status).toBe('active');
+  });
+
+  it("should clear new task description after added", function() {
+    scope.newTask.description = 'a new task';
+    scope.addTask();
+    expect(scope.newTask.description).toBe('');
+  });
 });
