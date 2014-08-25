@@ -1,13 +1,7 @@
 <div class="row" ng-init="init()">
   <h1>My list of things to do!</h1><br>
 
-  <div class="row" ng-repeat="task in activeTasks()" style="padding:5px">
-    <div class="col-sm-1">
-      <button class="btn btn-primary btn-xs pull-right" ng-click="markAsDone(task)">Done</button>
-    </div>
-    <div class="col-sm-5">{{task.description}}</div>
-  </div>
-
+  <div open-task ng-repeat="task in activeTasks()"></div>
   <br>
   <div class="row" ng-init="addTaskHidden = true">
     <div style="margin-bottom:20px" ng-if="!addTaskHidden">
