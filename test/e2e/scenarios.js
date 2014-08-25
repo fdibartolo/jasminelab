@@ -23,4 +23,28 @@ describe("Home page", function() {
       })
     });
   });  
+
+  describe(", while clicking Show completed button", function() {
+    it("should show given done task", function() {
+      browser.get('#/home');
+      var firstTaskDescription;
+      element.all(by.binding('task.description')).first().getText().then(function(text) {
+        firstTaskDescription = text;
+      })
+
+      element.all(by.css('.btn.btn-primary.btn-xs')).first().click();
+      element(by.css('.btn.btn-default.btn-xs')).click();
+
+      element.all(by.binding('task.description')).last().getText().then(function(text) {
+        expect(text).toBe(firstTaskDescription);
+      })
+    });
+
+    it("should change its title", function() {
+      browser.get('#/home');
+      expect(element(by.css('.btn.btn-default.btn-xs')).getText()).toBe('View Completed tasks');
+      element(by.css('.btn.btn-default.btn-xs')).click();
+      expect(element(by.css('.btn.btn-default.btn-xs')).getText()).toBe('Hide Completed tasks');
+    });
+  });
 });

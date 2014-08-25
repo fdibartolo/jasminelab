@@ -16,8 +16,8 @@
     
     <div style="margin-top:40px" ng-if="!doneTasksHidden">
       <div class="row" ng-repeat="task in doneTasks()" style="padding:5px;">
-        <div class="col-sm-offset-0 col-sm-5">
-          <span class="text-muted">{{task.description}}</span>
+        <div class="col-sm-offset-1 col-sm-5">
+          <span class="text-muted"><i><small>{{task.description}}</small></i></span>
         </div>
       </div>
     </div>
