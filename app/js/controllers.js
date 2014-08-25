@@ -22,6 +22,10 @@ angular.module('demoApp.controllers', []).controller('TasksController',
     return $filter('filter')($scope.tasks, {status: 'active'})
   }
 
+  $scope.doneTasks = function() {
+    return $filter('filter')($scope.tasks, {status: 'done'})
+  }
+
   $scope.markAsDone = function(task) {
     task.status = 'done';
   }
