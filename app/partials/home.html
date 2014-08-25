@@ -9,6 +9,21 @@
   </div>
 
   <br>
+  <div class="row" ng-init="addTaskHidden = true">
+    <div style="margin-bottom:20px" ng-if="!addTaskHidden">
+      <div class="col-sm-offset-1 col-sm-3 input-group input-group-sm">
+        <input type="text" class="form-control" ng-model="newTask.description">
+        <span class="input-group-btn">
+          <button class="btn btn-success" type="button" ng-click="addTask()">Add</button>
+        </span>
+      </div>
+    </div>
+    <div class="col-sm-offset-1 col-sm-2 btn btn-xs btn-info" ng-click="addTaskHidden = !addTaskHidden">
+      {{addTaskHidden ? 'Add new task' : 'Close'}}
+    </div>
+  </div>
+
+  <br>
   <div class="row" ng-init="doneTasksHidden = true">
     <div class="col-sm-offset-1 col-sm-2 btn btn-xs btn-default" ng-click="doneTasksHidden = !doneTasksHidden">
       {{doneTasksHidden ? 'View' : 'Hide'}} Completed tasks
