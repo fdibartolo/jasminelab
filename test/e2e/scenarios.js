@@ -16,7 +16,7 @@ describe("Home page", function() {
         firstTaskDescription = text;
       })
 
-      element.all(by.css('.btn.btn-primary.btn-xs')).first().click();
+      clickFirstDoneTask();
 
       element.all(by.binding('task.description')).first().getText().then(function(text) {
         expect(text).not.toBe(firstTaskDescription);
@@ -32,8 +32,8 @@ describe("Home page", function() {
         firstTaskDescription = text;
       })
 
-      element.all(by.css('.btn.btn-primary.btn-xs')).first().click();
-      element(by.css('.btn.btn-default.btn-xs')).click();
+      clickFirstDoneTask();
+      clickShowCompleted();
 
       element.all(by.binding('task.description')).last().getText().then(function(text) {
         expect(text).toBe(firstTaskDescription);
@@ -43,8 +43,16 @@ describe("Home page", function() {
     it("should change its title", function() {
       browser.get('#/home');
       expect(element(by.css('.btn.btn-default.btn-xs')).getText()).toBe('View Completed tasks');
-      element(by.css('.btn.btn-default.btn-xs')).click();
+      clickShowCompleted();
       expect(element(by.css('.btn.btn-default.btn-xs')).getText()).toBe('Hide Completed tasks');
     });
   });
+
+  function clickFirstDoneTask() {
+    element.all(by.css('.btn.btn-primary.btn-xs')).first().click();
+  }
+
+  function clickShowCompleted() {
+    element(by.css('.btn.btn-default.btn-xs')).click();
+  }
 });
