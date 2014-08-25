@@ -7,4 +7,19 @@
     </div>
     <div class="col-sm-5">{{task.description}}</div>
   </div>
+
+  <br>
+  <div class="row" ng-init="doneTasksHidden = true">
+    <div class="col-sm-offset-1 col-sm-2 btn btn-xs btn-default" ng-click="doneTasksHidden = !doneTasksHidden">
+      {{doneTasksHidden ? 'View' : 'Hide'}} Completed tasks
+    </div>
+    
+    <div style="margin-top:40px" ng-if="!doneTasksHidden">
+      <div class="row" ng-repeat="task in doneTasks()" style="padding:5px;">
+        <div class="col-sm-offset-0 col-sm-5">
+          <span class="text-muted">{{task.description}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
