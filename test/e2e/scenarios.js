@@ -46,6 +46,12 @@ describe("Home page", function() {
       clickShowCompleted();
       expect(element(by.css('.btn.btn-default.btn-xs')).getText()).toBe('Hide Completed tasks');
     });
+
+    it("should show custom message if no done tasks", function() {
+      browser.get('#/home');
+      clickShowCompleted();
+      expect(element(by.id('no-done-tasks')).getText()).toBe('You better do something soon!');
+    });
   });
 
   function clickFirstDoneTask() {

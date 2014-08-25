@@ -15,6 +15,10 @@
     </div>
     
     <div style="margin-top:40px" ng-if="!doneTasksHidden">
+      <div id="no-done-tasks" ng-if="doneTasks().length == 0" class="col-sm-5">
+        <alert class="text-center" type="info">You better do something soon!</alert>
+      </div>
+
       <div class="row" ng-repeat="task in doneTasks()" style="padding:5px;">
         <div class="col-sm-offset-1 col-sm-5">
           <span class="text-muted"><i><small>{{task.description}}</small></i></span>
