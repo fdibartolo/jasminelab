@@ -24,6 +24,7 @@ describe("Home page", function() {
   describe(", while clicking Show completed button", function() {
     it("should show given done task", function() {
       browser.get('#/home');
+
       var firstTaskDescription;
       firstTask().getText().then(function(text) { firstTaskDescription = text; })
 
@@ -35,6 +36,7 @@ describe("Home page", function() {
 
     it("should change its title", function() {
       browser.get('#/home');
+
       expect(showCompletedTasksButton().getText()).toBe('View Completed tasks');
       clickShowCompletedTasksButton();
       expect(showCompletedTasksButton().getText()).toBe('Hide Completed tasks');
@@ -42,6 +44,7 @@ describe("Home page", function() {
 
     it("should show custom message if no done tasks", function() {
       browser.get('#/home');
+
       clickShowCompletedTasksButton();
       expect(element(by.id('no-done-tasks')).getText()).toBe('You better do something soon!');
     });
@@ -50,28 +53,29 @@ describe("Home page", function() {
   describe(", while clicking New task button", function() {
     it("should show input to enter new task", function() {
       browser.get('#/home');
-      expect(element.all(by.model('newTask.description')).count()).toBe(0);
+
+      expect(newTaskInput().isPresent()).toBe(false);
       clickNewTaskButton();
-      expect(element.all(by.model('newTask.description')).count()).toBe(1);
+      expect(newTaskInput().isPresent()).toBe(true);
     });
 
     it('should change its text', function(){
       browser.get('#/home');
-      expect(element(by.css('.btn.btn-xs.btn-info')).getText()).toEqual('Add new task');
+
+      expect(newTaskButton().getText()).toEqual('Add new task');
       clickNewTaskButton();
-      expect(element(by.css('.btn.btn-xs.btn-info')).getText()).toEqual('Close');
+      expect(newTaskButton().getText()).toEqual('Close');
     });
   });  
 
   describe(", while clicking Add task button", function() {
     it('should display task in the list', function(){
       browser.get('#/home');
+      
       clickNewTaskButton();
-      element(by.model('newTask.description')).sendKeys('my new task');
+      newTaskInput().sendKeys('my new task');
       clickAddTaskButton();
-      element.all(by.binding('task.description')).last().getText().then(function(text) {
-        expect(text).toEqual('my new task');
-      });
+      lastTask().getText().then(function(text) { expect(text).toBe('my new task'); })
     });
   });  
 });
@@ -96,6 +100,13 @@ function clickShowCompletedTasksButton() {
   element(by.css('.btn.btn-default.btn-xs')).click();
 }
 
+function newTaskButton() {
+  return element(by.css('.btn.btn-xs.btn-info'));
+}
+
+function newTaskInput() {
+  return element(by.model('newTask.description'));
+}
 function clickNewTaskButton() {
   element(by.css('.btn.btn-xs.btn-info')).click();
 }
